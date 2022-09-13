@@ -16,4 +16,13 @@ async function getProductStock(req, res) {
   return res.status(404).send({ message: "Api route not found" });
 }
 
-export { getProducts, getProductStock };
+async function getProductImages(req, res) {
+  if (req.method === "GET") {
+    const data = await import("./products_stock.json");
+    return res.status(200).send(data);
+  }
+
+  return res.status(404).send({ message: "Api route not found" });
+}
+
+export { getProducts, getProductStock, getProductImages };
