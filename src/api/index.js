@@ -1,5 +1,3 @@
-import ProductList from "./products.json";
-
 async function getProducts(req, res) {
   if (req.method === "GET") {
     const data = await import("./products.json");
