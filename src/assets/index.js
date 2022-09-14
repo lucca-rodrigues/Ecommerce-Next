@@ -11,6 +11,12 @@ import Product2_A from "./products/2-a.webp";
 import Product2_B from "./products/2-b.webp";
 import Product2_C from "./products/2-c.webp";
 
+import Product3_A from "./products/3-a.webp";
+import Product3_B from "./products/3-b.webp";
+import Product3_C from "./products/3-c.webp";
+import Product3_D from "./products/3-d.webp";
+import Product3_E from "./products/3-e.webp";
+
 export {
   Logo,
   Banner1,
@@ -23,4 +29,9 @@ export {
   Product2_A,
   Product2_B,
   Product2_C,
+  Product3_A,
+  Product3_B,
+  Product3_C,
+  Product3_D,
+  Product3_E,
 };
