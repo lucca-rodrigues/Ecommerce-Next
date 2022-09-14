@@ -45,13 +45,6 @@ export default function Home() {
         {products?.map((item) => (
           <ProductItem key={item?.id} data={item} />
         ))}
-        {/* <ProductItem /> */}
-        {/* <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem /> */}
       </ProductsBox>
       <Footer />
     </>
