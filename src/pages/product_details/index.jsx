@@ -1,4 +1,5 @@
 import React from "react";
+import { useRouter } from "next/router";
 import { Stack } from "@mui/system";
 import { ProductImagesBox } from "../../components/ProductImagesBox";
 import { Button, Divider, Grid, Typography } from "@mui/material";
@@ -6,9 +7,16 @@ import { Button, Divider, Grid, Typography } from "@mui/material";
 import { Container } from "./styles";
 import { ProductColor } from "../../components/ProductColor";
 import { ProductSize } from "../../components/ProductSize";
+import { toast } from "react-toastify";
 import { Colors } from "../../styles/colors";
 
 export default function ProductDetails() {
+  const router = useRouter();
+
+  function addProductToCart() {
+    toast.success("Produto adicionado ao carrinho!");
+    router.push("/");
+  }
   return (
     <Container>
       <Grid
@@ -57,6 +65,7 @@ export default function ProductDetails() {
                 width: "70%",
                 margin: "0 auto",
               }}
+              onClick={() => addProductToCart()}
             >
               Comprar
             </Button>
