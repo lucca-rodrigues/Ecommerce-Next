@@ -12,4 +12,5 @@ export const Container = styled.div`
   justify-content: center;
   font-weight: 700;
   margin: 10px 10px 10px 0px;
+  border: ${(props) => props.color === "white" && `1px solid ${Colors.grey}`};
 `;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Stack } from "@mui/system";
 import { ProductImagesBox } from "../../components/ProductImagesBox";
@@ -9,13 +9,34 @@ import { ProductColor } from "../../components/ProductColor";
 import { ProductSize } from "../../components/ProductSize";
 import { toast } from "react-toastify";
 import { Colors } from "../../styles/colors";
+import { ProductList } from "../../api/products";
+import { ProductImages } from "../../api/product_images";
 
 export default function ProductDetails() {
   const router = useRouter();
+  const productId = Number(router.query.id);
+  const [productDetails, setProductDetails] = useState({});
 
-  const productId = router.query.id;
+  const mergeProductDataAndImages = useCallback(() => {
+    const productDetails = [];
 
-  console.log("Product ID", productId);
+    ProductList.filter((item) => item["id"] === productId).map(
+      (item, index) => {
+        if (item["id"] === ProductImages[index]["id"]) {
+          productDetails.push({
+            ...item,
+            images: ProductImages[index]["images"],
+          });
+        }
+      }
+    );
+
+    setProductDetails(productDetails[0]);
+  }, [productId]);
+
+  useEffect(() => {
+    mergeProductDataAndImages();
+  }, [mergeProductDataAndImages, productId]);
 
   function addProductToCart() {
     toast.success("Produto adicionado ao carrinho!");
@@ -35,14 +56,14 @@ export default function ProductDetails() {
         </Grid>
         <Grid item md={6}>
           <Stack>
-            <h3>Marca do produto</h3>
+            <h3>{productDetails?.brand}</h3>
           </Stack>
           <Stack mt={2}>
-            <h1>NOME DO PRODUTO</h1>
+            <h1>{productDetails?.title}</h1>
           </Stack>
           <Divider orientation="horizontal" />
           <Stack mt={2}>
-            <h2>R$ 49,90</h2>
+            <h2>R$ {productDetails?.price}</h2>
             <h2>R$ 19,90 {`(60% off)`}</h2>
             <h5>1x de R$ 19,90* sem juros no Cartão Renner</h5>
           </Stack>
@@ -50,9 +71,9 @@ export default function ProductDetails() {
             <Typography>COR</Typography>
           </Stack>
           <Stack direction="row">
-            <ProductColor></ProductColor>
-            <ProductColor color="blue"></ProductColor>
-            <ProductColor color="red"></ProductColor>
+            {productDetails?.color?.map((item) => (
+              <ProductColor key={item} color={item} />
+            ))}
           </Stack>
           <Stack>
             <Typography>TAMANHO</Typography>

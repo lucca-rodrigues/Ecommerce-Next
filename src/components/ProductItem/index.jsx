@@ -9,8 +9,7 @@ export function ProductItem({ data }) {
   const router = useRouter();
 
   function handleProductDetails() {
-    // router.push(`/product_details/${productId}`);
-    router.push(`/product_details/[productId]`);
+    router.push(`/product_details/${productId}`);
     console.log("item:", data);
   }
   return (
