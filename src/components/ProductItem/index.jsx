@@ -9,8 +9,8 @@ export function ProductItem({ data }) {
   return (
     <Container>
       <Image src={firstImage} alt="" width={300} height={300} />
-      <p>Tênis Cano Baixo com Recortes Branco</p>
-      <p>R$ 119.90</p>
+      <p>{data["title"]}</p>
+      <p>{data["price"]}</p>
       <InstallmentPricing>3x de R$ 39,97*</InstallmentPricing>
     </Container>
   );
