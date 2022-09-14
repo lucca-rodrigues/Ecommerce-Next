@@ -52,7 +52,7 @@ export const ProductList = [
     brand: "Marfinno",
     price: 49.9,
     price_offer: 19.9,
-
+    color: ["white", "black", "green"],
     subtitle: "Blusa Básica em Algodão com Manga Curta Branco",
     stock_total_quantity: 45,
     description:

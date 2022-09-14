@@ -2,8 +2,11 @@ import Head from "next/head";
 import styled from "styled-components";
 import { Colors } from "../../styles/colors.js";
 export const Container = styled.div`
-  width: 100%;
+  width: 70%;
   text-align: center;
+  border: 1px solid ${Colors.grey};
+  padding-bottom: 50px;
+  border-radius: 20px;
 `;
 
 export const InstallmentPricing = styled.span`

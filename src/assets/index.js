@@ -1,4 +1,5 @@
 import Logo from "./logo.webp";
+import Placeholder from "./placeholder.jpg";
 import Banner1 from "./banner-1.webp";
 import Product1_A from "./products/1-a.webp";
 import Product1_B from "./products/1-b.webp";
@@ -19,6 +20,7 @@ import Product3_E from "./products/3-e.webp";
 
 export {
   Logo,
+  Placeholder,
   Banner1,
   Product1_A,
   Product1_B,
