@@ -11,11 +11,7 @@ import { ProductImages } from "../api/product_images";
 export default function Home() {
   const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    teste();
-  }, []);
-
-  async function teste() {
+  async function mergeProductDataAndImages() {
     const arrayProducts = [];
 
     ProductList.map((item, index) => {
@@ -26,9 +22,12 @@ export default function Home() {
         });
       }
     });
-    // await Promise.all(promisses);
     setProducts(arrayProducts);
   }
+
+  useEffect(() => {
+    mergeProductDataAndImages();
+  }, []);
 
   return (
     <>
