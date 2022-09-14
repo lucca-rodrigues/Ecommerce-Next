@@ -13,6 +13,10 @@ import { Colors } from "../../styles/colors";
 export default function ProductDetails() {
   const router = useRouter();
 
+  const productId = router.query.id;
+
+  console.log("Product ID", productId);
+
   function addProductToCart() {
     toast.success("Produto adicionado ao carrinho!");
     router.push("/");
