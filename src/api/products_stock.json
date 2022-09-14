@@ -38,5 +38,25 @@
         "color": "white"
       }
     ]
+  },
+  {
+    "id": 2,
+    "sizes": [
+      {
+        "size": 60,
+        "quantity": 5,
+        "color": ""
+      },
+      {
+        "size": 100,
+        "quantity": 1,
+        "color": ""
+      },
+      {
+        "size": 200,
+        "quantity": 9,
+        "color": ""
+      }
+    ]
   }
 ]

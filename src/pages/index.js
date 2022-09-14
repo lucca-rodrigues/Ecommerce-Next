@@ -1,11 +1,35 @@
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { MainBanner } from "../components/MainBanner";
 import { ProductItem } from "../components/ProductItem";
 import { ProductsBox } from "../components/ProductsBox";
+import { ProductList } from "../api/products.js";
+import { ProductImages } from "../api/product_images";
 
 export default function Home() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    teste();
+  }, []);
+
+  async function teste() {
+    const arrayProducts = [];
+
+    ProductList.map((item, index) => {
+      if (item["id"] === ProductImages[index]["id"]) {
+        arrayProducts.push({
+          ...item,
+          images: ProductImages[index]["images"],
+        });
+      }
+    });
+    // await Promise.all(promisses);
+    setProducts(arrayProducts);
+  }
+
   return (
     <>
       <Head>
@@ -19,13 +43,16 @@ export default function Home() {
       <Header />
       <MainBanner />
       <ProductsBox>
+        {products?.map((item) => (
+          <ProductItem key={item?.id} data={item} />
+        ))}
+        {/* <ProductItem /> */}
+        {/* <ProductItem />
         <ProductItem />
         <ProductItem />
         <ProductItem />
         <ProductItem />
-        <ProductItem />
-        <ProductItem />
-        <ProductItem />
+        <ProductItem /> */}
       </ProductsBox>
       <Footer />
     </>
