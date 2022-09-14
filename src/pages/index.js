@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import { MainBanner } from "../components/MainBanner";
 import { ProductItem } from "../components/ProductItem";
@@ -26,12 +27,7 @@ export default function Home() {
         <ProductItem />
         <ProductItem />
       </ProductsBox>
-
-      <footer>
-        <span>
-          {/* <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} /> */}
-        </span>
-      </footer>
+      <Footer />
     </>
   );
 }
