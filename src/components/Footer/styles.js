@@ -8,5 +8,5 @@ export const Container = styled.footer`
   background-color: #e0e0e0;
   color: ${Colors.default};
   padding: 20px 50px;
-  margin-top: 100px;
+  // margin-top: 100px;
 `;

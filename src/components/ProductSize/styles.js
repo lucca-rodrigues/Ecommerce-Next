@@ -6,7 +6,7 @@ export const Container = styled.div`
   width: 50px;
   height: 50px;
   // background-color: ${(props) => props.color ?? Colors.grey};
-  color: ${Colors.grey};
+  color: ${Colors.green};
   border: 1px solid ${Colors.grey};
   display: flex;
   align-items: center;

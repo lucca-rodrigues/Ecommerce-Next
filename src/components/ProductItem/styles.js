@@ -5,7 +5,7 @@ export const Container = styled.div`
   width: 70%;
   text-align: center;
   border: 1px solid ${Colors.grey};
-  padding-bottom: 50px;
+  padding-bottom: 30px;
   border-radius: 20px;
 `;
 

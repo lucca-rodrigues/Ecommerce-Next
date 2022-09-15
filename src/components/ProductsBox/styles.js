@@ -7,5 +7,5 @@ export const Container = styled.div`
   gap: 40px;
   max-width: 70%;
   margin: 0 auto;
-  padding-top: 100px;
+  padding: 120px 0px;
 `;

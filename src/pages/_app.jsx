@@ -4,6 +4,8 @@ import { Footer } from "../components/Footer";
 import { Header } from "../components/Header";
 import "react-toastify/dist/ReactToastify.css";
 import "../styles/globals.css";
+import { MainBanner } from "../components/MainBanner";
+import { Banner3 } from "../assets";
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -19,6 +21,7 @@ function MyApp({ Component, pageProps }) {
       <ToastContainer />
       <Header />
       <Component {...pageProps} />
+      <MainBanner image={Banner3} />
       <Footer />
     </>
   );

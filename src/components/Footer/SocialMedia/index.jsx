@@ -1,4 +1,3 @@
-import { FaApple, FaGooglePlay } from "react-icons/fa";
 import { Container, List } from "./styles";
 
 export function SocialMedia() {

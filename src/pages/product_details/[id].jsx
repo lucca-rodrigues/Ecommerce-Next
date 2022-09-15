@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
 import { Stack } from "@mui/system";
 import { ProductImagesBox } from "../../components/ProductImagesBox";
@@ -11,37 +11,93 @@ import { toast } from "react-toastify";
 import { Colors } from "../../styles/colors";
 import { ProductList } from "../../api/products";
 import { ProductImages } from "../../api/product_images";
+import { HandleProductColors } from "./functions/handleProductColors";
+import { HandleProductSizes } from "./functions/handleProductSizes";
+import { ProductStock } from "../../api/products_stock";
 
 export default function ProductDetails() {
   const router = useRouter();
   const productId = Number(router.query.id);
-  const [productDetails, setProductDetails] = useState({});
+  const [productDetails, setProductDetails] = useState([]);
 
-  const mergeProductDataAndImages = useCallback(() => {
-    const productDetails = [];
+  // const mergeProductDataAndImages = useCallback(() => {
+  //   const productDetails = [];
 
-    ProductList.filter((item) => item["id"] === productId).map(
-      (item, index) => {
-        if (item["id"] === ProductImages[index]["id"]) {
-          productDetails.push({
-            ...item,
-            images: ProductImages[index]["images"],
-          });
-        }
-      }
-    );
+  //   ProductList.filter((item) => item["id"] === productId).map(
+  //     (item, index) => {
+  //       if (
+  //         item["id"] === ProductImages[index]["id"] &&
+  //         item["id"] === ProductStock
+  //       ) {
+  //         productDetails.push({
+  //           ...item,
+  //           images: ProductImages[index]["images"],
+  //           stock: ProductStock[index],
+  //         });
+  //       }
+  //     }
+  //   );
+  //   setProductDetails(productDetails[0]);
+  // }, [productId]);
 
-    setProductDetails(productDetails[0]);
+  // useEffect(() => {
+  //   mergeProductDataAndImages();
+  // }, [mergeProductDataAndImages, productId]);
+
+  // useMemo(() => {
+  //   if (productId) {
+  //     const productDetails = [];
+
+  //     ProductList.filter((item) => item["id"] === productId).map(
+  //       (item, index) => {
+  //         if (
+  //           item["id"] === ProductImages[index]["id"] &&
+  //           item["id"] === ProductStock[index]["id"]
+  //         ) {
+  //           productDetails.push({
+  //             ...item,
+  //             images: ProductImages[index]["images"],
+  //             stock: ProductStock[index],
+  //           });
+  //         }
+  //       }
+  //     );
+  //     setProductDetails(productDetails[0]);
+  //     console.log("productDetails", productDetails);
+  //   }
+  // }, [productId]);
+
+  useEffect(() => {
+    if (productId) {
+      const details = ProductList.filter((item) => item["id"] === productId);
+      const productImages = ProductImages.filter(
+        (item) => item["id"] === productId
+      );
+      const productStock = ProductStock?.filter(
+        (item) => item["id"] === productId
+      );
+
+      console.log("Details", details);
+      console.log("productImages", productImages);
+      console.log("productStock", productStock);
+      setProductDetails({
+        ...details[0],
+        stock: productStock[0]["sizes"] ?? [],
+        images: productImages[0]["images"] ?? [],
+        size: productStock[0]["sizes"] ?? [],
+      });
+    }
   }, [productId]);
 
   useEffect(() => {
-    mergeProductDataAndImages();
-  }, [mergeProductDataAndImages, productId]);
+    if (productDetails) console.log("productDetails", productDetails);
+  }, [productDetails]);
 
   function addProductToCart() {
     toast.success("Produto adicionado ao carrinho!");
     router.push("/");
   }
+
   return (
     <Container>
       <Grid
@@ -56,32 +112,21 @@ export default function ProductDetails() {
         </Grid>
         <Grid item md={6}>
           <Stack>
-            <h3>{productDetails?.brand}</h3>
+            <h3>{productDetails.brand}</h3>
           </Stack>
           <Stack mt={2}>
-            <h1>{productDetails?.title}</h1>
+            <h1>{productDetails.title}</h1>
           </Stack>
           <Divider orientation="horizontal" />
           <Stack mt={2}>
-            <h2>R$ {productDetails?.price}</h2>
+            <h2>R$ {productDetails.price}</h2>
             <h2>R$ 19,90 {`(60% off)`}</h2>
             <h5>1x de R$ 19,90* sem juros no Cartão Renner</h5>
           </Stack>
-          <Stack>
-            <Typography>COR</Typography>
-          </Stack>
-          <Stack direction="row">
-            {productDetails?.color?.map((item) => (
-              <ProductColor key={item} color={item} />
-            ))}
-          </Stack>
-          <Stack>
-            <Typography>TAMANHO</Typography>
-          </Stack>
-          <Stack direction="row">
-            <ProductSize size="P"></ProductSize>
-            <ProductSize size="M"></ProductSize>
-          </Stack>
+
+          <HandleProductColors productDetails={productDetails} />
+          <HandleProductSizes productDetails={productDetails} />
+
           <Stack mt={5}>
             <Button
               style={{
@@ -90,7 +135,7 @@ export default function ProductDetails() {
                 width: "70%",
                 margin: "0 auto",
               }}
-              onClick={() => addProductToCart()}
+              onClick={() => addProductToCart}
             >
               Comprar
             </Button>

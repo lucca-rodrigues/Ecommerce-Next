@@ -1,38 +1,23 @@
-import { useEffect, useState } from "react";
-
 import { MainBanner } from "../components/MainBanner";
 import { ProductItem } from "../components/ProductItem";
 import { ProductsBox } from "../components/ProductsBox";
 import { ProductList } from "../api/products.js";
-import { ProductImages } from "../api/product_images";
+import { Banner1, Banner3 } from "../assets";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [products, setProducts] = useState([]);
-
-  async function mergeProductDataAndImages() {
-    const arrayProducts = [];
-
-    ProductList.map((item, index) => {
-      if (item["id"] === ProductImages[index]["id"]) {
-        arrayProducts.push({
-          ...item,
-          images: ProductImages[index]["images"],
-        });
-      }
-    });
-    setProducts(arrayProducts);
-  }
+  const [productList, setProductList] = useState([]);
 
   useEffect(() => {
-    mergeProductDataAndImages();
-  }, []);
+    if (ProductList) setProductList(ProductList);
+  }, [productList]);
 
   return (
     <>
-      <MainBanner />
+      <MainBanner image={Banner1} />
       <ProductsBox>
-        {products?.map((item) => (
-          <ProductItem key={item?.id} data={item} />
+        {productList.map((item, index) => (
+          <ProductItem key={index} data={item} />
         ))}
       </ProductsBox>
     </>
