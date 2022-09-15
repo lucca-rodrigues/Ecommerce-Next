@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Box, Stack } from "@mui/system";
+import { Stack } from "@mui/system";
 import { ProductImagesBox } from "../../components/ProductImagesBox";
-import { Button, Divider, Grid, Typography } from "@mui/material";
+import { Button, Divider, Grid } from "@mui/material";
 
 import { Container } from "./styles";
 import { toast } from "react-toastify";
@@ -17,7 +17,6 @@ import {
   getProductImages,
   getProductStock,
 } from "./functions";
-import Image from "next/image";
 
 export default function ProductDetails() {
   const router = useRouter();
