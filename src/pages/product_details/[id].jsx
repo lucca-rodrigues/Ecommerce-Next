@@ -5,14 +5,12 @@ import { ProductImagesBox } from "../../components/ProductImagesBox";
 import { Button, Divider, Grid, Typography } from "@mui/material";
 
 import { Container } from "./styles";
-import { ProductColor } from "../../components/ProductColor";
-import { ProductSize } from "../../components/ProductSize";
 import { toast } from "react-toastify";
 import { Colors } from "../../styles/colors";
 import { ProductList } from "../../api/products";
 import { ProductImages } from "../../api/product_images";
-import { HandleProductColors } from "./functions/handleProductColors";
-import { HandleProductSizes } from "./functions/handleProductSizes";
+import { HandleProductColors } from "./components/handleProductColors";
+import { HandleProductSizes } from "./components/handleProductSizes";
 import { ProductStock } from "../../api/products_stock";
 
 export default function ProductDetails() {
