@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/router";
-import { Stack } from "@mui/system";
+import { Box, Stack } from "@mui/system";
 import { ProductImagesBox } from "../../components/ProductImagesBox";
 import { Button, Divider, Grid, Typography } from "@mui/material";
 
@@ -17,11 +17,13 @@ import {
   getProductImages,
   getProductStock,
 } from "./functions";
+import Image from "next/image";
 
 export default function ProductDetails() {
   const router = useRouter();
   const productId = Number(router.query.id);
   const [productDetails, setProductDetails] = useState([]);
+  const [galleryImages, setGalleryImages] = useState([]);
 
   useEffect(() => {
     if (productId) {
@@ -35,6 +37,8 @@ export default function ProductDetails() {
         images: productImages[0]["images"] ?? [],
         size: productStock[0]["sizes"] ?? [],
       });
+
+      setGalleryImages(productImages[0]["images"]);
     }
   }, [productId]);
 
@@ -53,7 +57,7 @@ export default function ProductDetails() {
         spacing={5}
       >
         <Grid item md={6}>
-          <ProductImagesBox images={[]} />
+          <ProductImagesBox images={galleryImages} />
         </Grid>
         <Grid item md={6}>
           <Stack>

@@ -1,22 +1,26 @@
 import { Grid } from "@mui/material";
 import { Box, Stack } from "@mui/system";
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Placeholder } from "../../assets";
 
 import { Container } from "./styles";
 
 export function ProductImagesBox({ images }) {
   const [selectedImage, setSelectedImage] = useState(Placeholder);
-  // const firstImage = ["images"][0]["path"]["src"];
+  const [galleryImages, setGalleryImages] = useState([]);
+  const firstImage = images?.[0]?.["path"]?.["src"];
 
-  // const firstImage = null;
+  useMemo(() => {
+    if (images && firstImage) setSelectedImage(firstImage);
+  }, [firstImage, images]);
 
-  // useMemo(() => {
-  //   if (firstImage) setSelectedImage(firstImage);
-  // }, [firstImage]);
+  useEffect(() => {
+    if (images) {
+      setGalleryImages(images);
+    }
+  }, [galleryImages, images]);
 
-  // console.log(firstImage);
   return (
     <Container>
       <Stack>
@@ -25,18 +29,11 @@ export function ProductImagesBox({ images }) {
         </Box>
       </Stack>
       <Stack direction="row" spacing={2} mt={2}>
-        <Box>
-          <Image src={selectedImage} alt="" width={100} height={100} />
-        </Box>
-        <Box>
-          <Image src={selectedImage} alt="" width={100} height={100} />
-        </Box>
-        <Box>
-          <Image src={selectedImage} alt="" width={100} height={100} />
-        </Box>
-        <Box>
-          <Image src={selectedImage} alt="" width={100} height={100} />
-        </Box>
+        {galleryImages?.map((item, index) => (
+          <Box key={index} onClick={() => setSelectedImage(item.path.src)}>
+            <Image src={item.path.src} alt="" width={100} height={100} />
+          </Box>
+        ))}
       </Stack>
     </Container>
   );

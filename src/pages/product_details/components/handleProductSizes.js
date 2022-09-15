@@ -4,7 +4,6 @@ import { ProductColor } from "../../../components/ProductColor";
 import { ProductSize } from "../../../components/ProductSize";
 
 export function HandleProductSizes({ productDetails }) {
-  console.log("sizeList", productDetails);
   return (
     <>
       {productDetails?.size && (
