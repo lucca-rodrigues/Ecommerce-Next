@@ -20,53 +20,6 @@ export default function ProductDetails() {
   const productId = Number(router.query.id);
   const [productDetails, setProductDetails] = useState([]);
 
-  // const mergeProductDataAndImages = useCallback(() => {
-  //   const productDetails = [];
-
-  //   ProductList.filter((item) => item["id"] === productId).map(
-  //     (item, index) => {
-  //       if (
-  //         item["id"] === ProductImages[index]["id"] &&
-  //         item["id"] === ProductStock
-  //       ) {
-  //         productDetails.push({
-  //           ...item,
-  //           images: ProductImages[index]["images"],
-  //           stock: ProductStock[index],
-  //         });
-  //       }
-  //     }
-  //   );
-  //   setProductDetails(productDetails[0]);
-  // }, [productId]);
-
-  // useEffect(() => {
-  //   mergeProductDataAndImages();
-  // }, [mergeProductDataAndImages, productId]);
-
-  // useMemo(() => {
-  //   if (productId) {
-  //     const productDetails = [];
-
-  //     ProductList.filter((item) => item["id"] === productId).map(
-  //       (item, index) => {
-  //         if (
-  //           item["id"] === ProductImages[index]["id"] &&
-  //           item["id"] === ProductStock[index]["id"]
-  //         ) {
-  //           productDetails.push({
-  //             ...item,
-  //             images: ProductImages[index]["images"],
-  //             stock: ProductStock[index],
-  //           });
-  //         }
-  //       }
-  //     );
-  //     setProductDetails(productDetails[0]);
-  //     console.log("productDetails", productDetails);
-  //   }
-  // }, [productId]);
-
   useEffect(() => {
     if (productId) {
       const details = ProductList.filter((item) => item["id"] === productId);
@@ -77,9 +30,6 @@ export default function ProductDetails() {
         (item) => item["id"] === productId
       );
 
-      console.log("Details", details);
-      console.log("productImages", productImages);
-      console.log("productStock", productStock);
       setProductDetails({
         ...details[0],
         stock: productStock[0]["sizes"] ?? [],
@@ -88,10 +38,6 @@ export default function ProductDetails() {
       });
     }
   }, [productId]);
-
-  useEffect(() => {
-    if (productDetails) console.log("productDetails", productDetails);
-  }, [productDetails]);
 
   function addProductToCart() {
     toast.success("Produto adicionado ao carrinho!");
@@ -135,7 +81,7 @@ export default function ProductDetails() {
                 width: "70%",
                 margin: "0 auto",
               }}
-              onClick={() => addProductToCart}
+              onClick={() => addProductToCart()}
             >
               Comprar
             </Button>

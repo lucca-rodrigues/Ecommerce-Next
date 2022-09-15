@@ -17,7 +17,7 @@ export function ProductItem({ data }) {
   }
 
   return (
-    <Container onClick={() => handleProductDetails()}>
+    <Container>
       <Image
         src={firstImage}
         alt=""
@@ -36,7 +36,7 @@ export function ProductItem({ data }) {
             width: "70%",
             margin: "0 auto",
           }}
-          onClick={() => addProductToCart()}
+          onClick={() => handleProductDetails()}
         >
           Ver mais
         </Button>
