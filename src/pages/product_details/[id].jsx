@@ -12,6 +12,11 @@ import { ProductImages } from "../../api/product_images";
 import { HandleProductColors } from "./components/handleProductColors";
 import { HandleProductSizes } from "./components/handleProductSizes";
 import { ProductStock } from "../../api/products_stock";
+import {
+  getProductDetails,
+  getProductImages,
+  getProductStock,
+} from "./functions";
 
 export default function ProductDetails() {
   const router = useRouter();
@@ -20,13 +25,9 @@ export default function ProductDetails() {
 
   useEffect(() => {
     if (productId) {
-      const details = ProductList.filter((item) => item["id"] === productId);
-      const productImages = ProductImages.filter(
-        (item) => item["id"] === productId
-      );
-      const productStock = ProductStock?.filter(
-        (item) => item["id"] === productId
-      );
+      const details = getProductDetails(ProductList, productId);
+      const productImages = getProductImages(ProductImages, productId);
+      const productStock = getProductStock(ProductStock, productId);
 
       setProductDetails({
         ...details[0],
